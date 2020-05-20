@@ -29,9 +29,10 @@ body {
 	width: 50px;
 	position: absolute;
 	z-index: 3;
-	opacity: .8;
+	opacity: .8; 
 	top: 0px;
 	rot90;
+
 }
 
 .thumbnail {

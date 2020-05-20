@@ -33,11 +33,48 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-	//Add code here to access the #slideShow element.
-	//Access the img element and replace its source
-	//with a new image from your images array which is loaded
-	//from the JSON string
+
+  if(mCurrentIndex >= mImages.length)
+  {
+    mCurrentIndex = 0;
+  }
+
+  if(mCurrentIndex < 0 )
+  {
+      mCurrentindex = mImages.length-1;
+  }
+
+  document.getElementById('photo').src = mImages[mCurrentIndex].img;
+
+  var loc = document.getElementsByClassName('location');
+  loc[0].innerHTML = "Location: + mImages[mCurrentIndex]".location;
+  var des = document.getElementsByClassName('description');
+  des[0].innerHTML = "Description: + mImages[mCurrentIndex]".description;
+  var dt = document.getElementsByClassName('date');
+  dt[0].innerhtml = "Date: + mImages[mCurrentIndex]".date;
+
+  mLastFrameTime = 0;
+  mCurrentIndex += 1;
+
+	var location = "italy";
+	var discripton = "venice";
+  var date = "1/07/2016";
+
+  //from the JSON string
 	console.log('swap photo');
+}
+
+function iterateJSON(mJson){
+  for( x= 0; x < mJson.images.length; x++ )
+  {
+
+  mImages[x] = new GalleryImage();
+
+  mImages[x].location = mJson.images[x].imgLocation;
+  mImages[x].description = mJson.images[x].description;
+  mImages[x].date = mJson.images[x].date;
+  mImages[x].img = mJson.images[x].imgPath;
+  }
 }
 
 // Counter for the mImages array
@@ -67,9 +104,10 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 }
 
 $(document).ready( function() {
+grabJSON();
 
 	// This initially hides the photos' metadata information
-	$('.details').eq(0).hide();
+	// $('.details').eq(0).hide();
 
 });
 
@@ -90,9 +128,11 @@ function grabJSON() {
 
 mRequest.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    var myObj = JSON.parse(this.responseText);
+    mJson = Json.parse(mReqeust.responseText);
+
+    iterateJSON(mJson);
   }
 };
-xmlhttp.open("GET", "mUrl", true);
-xmlhttp.send();
+mRequest.open("GET", mUrl, true);
+mReqeust.send();
 }
