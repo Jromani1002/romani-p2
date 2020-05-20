@@ -12,6 +12,7 @@ body {
 	margin-right: auto;
 	background-color: white;
 	border-radius: 2px;
+	max-width: inherit`;
 }
 
 #slideShow {
@@ -29,7 +30,7 @@ body {
 	width: 50px;
 	position: absolute;
 	z-index: 3;
-	opacity: .8; 
+	opacity: .8;
 	top: 0px;
 	rot90;
 
@@ -54,6 +55,7 @@ body {
 #prevPhoto {
 	height: 42px;
 	width: 42px;
+
 }
 
 #nextPhoto {
@@ -101,4 +103,18 @@ Make it animate nicely. You'll need CSS3 for this*/
 	opacity: 0.3;
 	text-decoration: none;
 	transition: all 1s ease;
+}
+
+.nav #prevPhoto:hover {
+	height: 42px;
+	width: 42px;
+	opacity: 80%;
+	color: #FF00FF
+}
+
+.nav #nextPhoto:hover{
+	height: 42px;
+	width: 42px;
+	opacity: 80%;
+	color: #FF00FF;
 }
